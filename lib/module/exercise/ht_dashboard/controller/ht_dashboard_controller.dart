@@ -20,6 +20,10 @@ class HtDashboardController extends State<HtDashboardView>
     - Daftar Product
     - Daftar Product Categories
     */
+
+    await loadProducts();
+    await loadProductCategories();
+    setState(() {});
   }
 
   @override
@@ -91,16 +95,25 @@ class HtDashboardController extends State<HtDashboardView>
     TODO: --
     1. Buat sebuah get request menggunakan DIO
     ! snippet: dio_get
-
     @GET
     @URL
     "${AppConfig.baseUrl}/products"
-
     2. Masukkan response data ke dalam productList
     productList = obj["data"];
-
     3. Panggil setState setelah-nya
     */
+
+    var response = await Dio().get(
+      "${AppConfig.baseUrl}/products",
+      options: Options(
+        headers: {
+          "Content-Type": "application/json",
+        },
+      ),
+    );
+    Map obj = response.data;
+    productList = obj["data"];
+    setState(() {});
   }
 
   loadProductCategories() async {
@@ -110,15 +123,24 @@ class HtDashboardController extends State<HtDashboardView>
     TODO: --
     4. Buat sebuah get request menggunakan DIO
     ! snippet: dio_get
-
     @GET
     @URL
     "${AppConfig.baseUrl}/product-categories"
-
     5. Masukkan response data ke dalam productCategoryList
     productCategoryList = obj["data"];
-
     6. Panggil setState setelah-nya
     */
+
+    var response = await Dio().get(
+      "${AppConfig.baseUrl}/product-categories",
+      options: Options(
+        headers: {
+          "Content-Type": "application/json",
+        },
+      ),
+    );
+    Map obj = response.data;
+    productCategoryList = obj["data"];
+    setState(() {});
   }
 }

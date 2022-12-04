@@ -86,7 +86,6 @@ class HtProductListController extends State<HtProductListView>
     Jika list-nya ter-refresh,
     Tasks ini selesai
     */
-
     var url = "${AppConfig.baseUrl}/products";
     print("url: $url");
 
